@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="cg.genealogie.orm">
+	<class name="Personne" table="personne">
+		<id
+			column="idPersonne"
+			name="IdPersonne"
+			type="integer"
+		>
+			<generator class="vm" />
+		</id>
+		<property
+			column="naissance"
+			length="10"
+			name="Naissance"
+			not-null="true"
+			type="date"
+		 />
+
+		<many-to-one
+			class="Personne"
+			name="Idpersonne2"
+			not-null="true"
+		>
+			<column name="idPersonne_2" />
+		</many-to-one>
+		<many-to-one
+			class="Personne"
+			name="Idpersonne1"
+			not-null="true"
+		>
+			<column name="idPersonne_1" />
+		</many-to-one>
+		<set inverse="true" name="PersonneSetByIdpersonne2">
+			<key column="idPersonne_2" />
+			<one-to-many class="Personne" />
+		</set>
+		<set inverse="true" name="PersonneSetByIdpersonne1">
+			<key column="idPersonne_1" />
+			<one-to-many class="Personne" />
+		</set>
+		<set inverse="true" name="MariageSetByIdpersonne1">
+			<key column="idPersonne_1" />
+			<one-to-many class="Mariage" />
+		</set>
+		<set inverse="true" name="MariageSetByIdPersonne">
+			<key column="idPersonne" />
+			<one-to-many class="Mariage" />
+		</set>
+		<set
+			cascade="all"
+			name="PrenomSet"
+			table="prenomme"
+		>
+			<key column="idPersonne" />
+			<many-to-many class="Prenom" column="prenom" />
+		</set>
+		<set
+			cascade="all"
+			name="NomSet"
+			table="nomme"
+		>
+			<key column="idPersonne" />
+			<many-to-many class="Nom" column="nom" />
+		</set>
+	</class>
+</hibernate-mapping>

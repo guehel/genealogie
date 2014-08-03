@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="cg.genealogie.orm">
+	<class name="Nom" table="nom">
+		<id
+			column="nom"
+			name="Nom"
+			type="string"
+		>
+			<generator class="vm" />
+		</id>
+		<set
+			cascade="all"
+			name="PersonneSet"
+			table="nomme"
+		>
+			<key column="nom" />
+			<many-to-many class="Personne" column="idPersonne" />
+		</set>
+	</class>
+</hibernate-mapping>

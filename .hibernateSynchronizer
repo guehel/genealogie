@@ -1,0 +1,5 @@
+package=cg.genealogie.orm
+databaseUrl=jdbc:mysql://localhost/geneologie
+driver=com.mysql.jdbc.Driver
+username=root
+ConfigurationFile=\genealogie\src\main\resources\hibernate.cfg.xml

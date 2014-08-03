@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping package="cg.genealogie.orm">
+	<class name="Prenomme" table="prenomme">
+		<composite-id>
+			<key-many-to-one
+				class="Prenom"
+				column="prenom"
+				name="Prenom"
+			 />
+			<key-many-to-one
+				class="Personne"
+				column="idPersonne"
+				name="IdPersonne"
+			 />
+		</composite-id>
+	</class>
+</hibernate-mapping>
