@@ -13,6 +13,10 @@ import net.sf.hibernate.Transaction;
 import cg.genealogie.orm.Personne;
 import cg.genealogie.orm.dao.HibernateSessionFactory;
 
+/**
+ * @author Guehel
+ *
+ */
 public class TraitementPersonne implements Traitement {
 
 	public Boolean traiter(HttpServletRequest request) {
@@ -45,7 +49,13 @@ public class TraitementPersonne implements Traitement {
 		return false;
 	}
 	
+	/**parametre la requete get avec la lsite des personne pour permettre le chois ainsi que le choix de des personn
+	 * 
+	 * @param request la requete http
+	 */
 	public void initialiser(HttpServletRequest request){
+		// TODO penser a modifier le schema de la base donne pour integrer le sexe des personnes 
+		//alter table personne (sexe varchar (10) check in {'homme','femme'})
 		try {
 			Session session = HibernateSessionFactory.currentSession();
 			ArrayList<Personne> liste = (ArrayList<Personne>) session.createCriteria(Personne.class).list();
