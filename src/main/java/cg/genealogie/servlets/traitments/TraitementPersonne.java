@@ -2,6 +2,7 @@ package cg.genealogie.servlets.traitments;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +43,18 @@ public class TraitementPersonne implements Traitement {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public void initialiser(HttpServletRequest request){
+		try {
+			Session session = HibernateSessionFactory.currentSession();
+			ArrayList<Personne> liste = (ArrayList<Personne>) session.createCriteria(Personne.class).list();
+			request.setAttribute("personnes", liste);
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
